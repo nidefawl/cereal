@@ -1021,8 +1021,11 @@ namespace cereal
         else // need to load
         {
           std::uint32_t version;
-
-          process( make_nvp<ArchiveType>("cereal_class_version", version) );
+          try {
+            process( make_nvp<ArchiveType>("cereal_class_version", version) );
+          } catch (Exception&) {
+            version = 0;
+          }
           itsVersionedTypes.emplace_hint( lookupResult, hash, version );
 
           return version;
