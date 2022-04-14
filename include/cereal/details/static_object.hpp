@@ -47,6 +47,9 @@
 #if defined(_MSC_VER) && !defined(__clang__)
 #   define CEREAL_DLL_EXPORT __declspec(dllexport)
 #   define CEREAL_USED
+#elif defined(__MINGW32__)
+#   define CEREAL_DLL_EXPORT __attribute__ ((dllexport))
+#   define CEREAL_USED __attribute__ ((__used__))
 #else // clang or gcc
 #   define CEREAL_DLL_EXPORT __attribute__ ((visibility("default")))
 #   define CEREAL_USED __attribute__ ((__used__))
